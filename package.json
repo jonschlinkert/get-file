@@ -1,0 +1,47 @@
+{
+  "name": "get-file",
+  "description": "CLI to get a single file from Github repository.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/get-file",
+  "author": {
+    "name": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonschlinkert/get-file.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/get-file/issues"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/jonschlinkert/get-file/blob/master/LICENSE"
+  },
+  "files": [
+    "cli.js"
+  ],
+  "preferGlobal": true,
+  "bin": {
+    "get-file": "./cli.js"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "chalk": "^0.5.1",
+    "log-symbols": "^1.0.1"
+  },
+  "keywords": [
+    "download",
+    "file",
+    "get",
+    "github",
+    "repo",
+    "repository"
+  ]
+}
