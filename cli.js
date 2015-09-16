@@ -3,6 +3,7 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 var https = require('https');
 var chalk = require('chalk');
 var symbol = require('log-symbols');
@@ -43,7 +44,7 @@ function listFiles(repo, callback) {
 }
 
 function getFile(repo, filename) {
-  var file = fs.createWriteStream(filename, {'flags': 'a'});
+  var file = fs.createWriteStream(path.basename(filename), {'flags': 'a'});
   https.get('https://raw.githubusercontent.com/' + repo + '/master/' + filename, function (res) {
     if (res.statusCode !== 200) {
       console.log(chalk.red('Cannot find'), chalk.bold(filename));
