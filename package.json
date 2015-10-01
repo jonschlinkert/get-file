@@ -19,11 +19,10 @@
     "url": "https://github.com/jonschlinkert/get-file/blob/master/LICENSE"
   },
   "files": [
-    "cli.js"
+    "bin/"
   ],
-  "preferGlobal": true,
   "bin": {
-    "get-file": "./cli.js"
+    "get-file": "./bin/cli.js"
   },
   "main": "index.js",
   "engines": {
