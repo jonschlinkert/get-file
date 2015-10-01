@@ -19,12 +19,13 @@
     "url": "https://github.com/jonschlinkert/get-file/blob/master/LICENSE"
   },
   "files": [
+    "index.js",
     "bin/"
   ],
+  "main": "index.js",
   "bin": {
     "get-file": "./bin/cli.js"
   },
-  "main": "index.js",
   "engines": {
     "node": ">=0.10.0"
   },
@@ -35,6 +36,13 @@
     "chalk": "^0.5.1",
     "log-symbols": "^1.0.1"
   },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-istanbul": "^0.10.1",
+    "gulp-jshint": "^1.11.2",
+    "gulp-mocha": "^2.1.3",
+    "jshint-stylish": "^2.0.1"
+  },
   "keywords": [
     "download",
     "file",
@@ -42,12 +50,5 @@
     "github",
     "repo",
     "repository"
-  ],
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-istanbul": "^0.10.1",
-    "gulp-jshint": "^1.11.2",
-    "gulp-mocha": "^2.1.3",
-    "jshint-stylish": "^2.0.1"
-  }
+  ]
 }
