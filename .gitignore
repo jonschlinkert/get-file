@@ -1,5 +1,6 @@
 *.DS_store
 *.sublime-*
+coverage
 _gh_pages
 actual
 bower_components
