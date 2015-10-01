@@ -40,4 +40,14 @@ describe('get-file', function () {
       });
     });
   });
+
+  it('should return an error when file does not exist in repository', function (done) {
+    client.getFile('jonschlinkert/get-file', 'foo-bar-baz.badfile', function (err, res) {
+      if (err) {
+        assert(typeof res === 'undefined');
+        return done();
+      }
+      done(new Error('Execpted a not found error'));
+    });
+  });
 });
