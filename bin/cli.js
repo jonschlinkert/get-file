@@ -2,6 +2,7 @@
 
 'use strict';
 
+var fs = require('fs');
 var chalk = require('chalk');
 var symbol = require('log-symbols');
 var client = require('../');
@@ -35,14 +36,26 @@ if (file === '--list') {
     console.log(files);
   });
 } else {
-  client.getFile(repo, file, function (err) {
+  client.getFile(repo, file, function (err, res) {
     if (err) {
       console.log(err);
       console.log('Try doing', chalk.gray('`get-file ' + repo + ' --list`'), 'to list the available files.');
       process.exit(1);
     }
-    console.log();
-    console.log('  ' + symbol.success, ' Got:', chalk.bold(file));
-    console.log();
+
+    function success () {
+      console.log();
+      console.log('  ' + symbol.success, ' Got:', chalk.bold(file));
+      console.log();
+    }
+
+    var ws = fs.createWriteStream(file, {'flags': 'a'});
+    res.pipe(ws)
+      .on('error', function (err) {
+        console.log(chalk.red('Error:'), err);
+        process.exit(1);
+      })
+      .on('finish', success)
+      .on('end', success);
   });
 }

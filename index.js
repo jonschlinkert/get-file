@@ -1,6 +1,5 @@
 'use strict';
 
-var fs = require('fs');
 var https = require('https');
 var chalk = require('chalk');
 
@@ -30,16 +29,12 @@ module.exports = {
   },
 
   getFile: function (repo, filename, callback) {
-    var file = fs.createWriteStream(filename, {'flags': 'a'});
     https.get('https://raw.githubusercontent.com/' + repo + '/master/' + filename, function (res) {
       if (res.statusCode !== 200) {
         var msg = chalk.red('Cannot find') + ' ' + chalk.bold(filename);
         return callback(new Error(msg));
       }
-      res.pipe(file)
-        .on('error', callback)
-        .on('finish', callback)
-        .on('end', callback);
+      return callback(null, res);
     }).on('error', callback);
   }
 };
