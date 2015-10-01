@@ -2,13 +2,13 @@
 
 > CLI to get a single file from Github repository.
 
-## Install globally with [npm](npmjs.org):
+## CLI Usage
 
-```bash
-npm i -g get-file
+Install globally with [npm](https://www.npmjs.com/)
+
+```sh
+$ npm i -g get-file
 ```
-
-## Usage
 
 Specify the repo and filename:
 
@@ -24,19 +24,61 @@ To see a list of files for a repo before downloading one:
 get-file assemble/assemble --list
 ```
 
+## API Usage
+
+```sh
+$ npm i get-file --save-dev
+```
+
+```js
+var client = require('get-file');
+```
+
+**Params**
+
+* `repo` **{String}**: Repository to get list of files.
+* `cb` **{Function}**: Function that takes `err` and `files` arguments
+
+**Example**
+
+```js
+client.listFiles('jonschlinkert/get-file', function (err, files) {
+  if (err) return console.error(err);
+  console.log(files);
+});
+```
+
+**Params**
+
+* `repo` **{String}**: Repository to get file from.
+* `filename` **{String}**: file to get.
+* `cb` **{Function}**: Callback function that takes `err` and `res` arguments.
+
+**Example**
+
+```js
+client.getFile('jonschlinkert/get-file', 'package.json', function (err, res) {
+  if (err) return console.error(err);
+  var file = fs.createWriteStream('package.json');
+  res.pipe(file);
+});
+```
+
 ## Contributing
+
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/jonschlinkert/get-file/issues)
 
 ## Author
 
 **Jon Schlinkert**
- 
+
 + [github/jonschlinkert](https://github.com/jonschlinkert)
-+ [twitter/jonschlinkert](http://twitter.com/jonschlinkert) 
++ [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
 
 ## License
+
 Copyright © 2015 Jon Schlinkert
-Released under the MIT license
+Released under the MIT license.
 
 ***
 
