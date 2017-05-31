@@ -1,61 +1,68 @@
 #!/usr/bin/env node
 
-'use strict';
-
 var fs = require('fs');
-var chalk = require('chalk');
-var symbol = require('log-symbols');
-var client = require('../');
+var path = require('path');
+var colors = require('ansi-colors');
+var mkdir = require('fs-mkdirp-stream/mkdirp');
+var argv = require('minimist')(process.argv.slice(2));
+var ok = require('log-ok');
+var get = require('..');
 
-var argv = process.argv.slice(2);
-var repo = argv[0];
-var file = argv[1];
+var repo = argv._[0] || argv.repo;
+var file = argv._[1] || argv.file;
 
 if (!repo) {
-  console.log('please specify a repo.');
+  console.log('please specify owner/repo as the first argument');
   process.exit(1);
 }
 
-if (!file) {
-  console.log('please specify a file.');
+if (!file && !argv.list) {
+  console.log('please specify a filename');
   process.exit(1);
 }
 
-if (file === '--list') {
-  console.log(chalk.gray('\nFiles from:'), chalk.bold(repo) + ':');
+if (argv.list === true) {
+  console.log();
+  console.log(colors.gray('Files from'), colors.cyan(repo) + ':');
 
-  client.listFiles(repo, function (err, files) {
-    if (err) {
-      console.log(chalk.red('Error:'), err);
-      process.exit(1);
-    }
-    files = files.map(function (name) {
-      return '  ' + name;
-    }).join('\n');
+  get.files(repo, function(err, files) {
+    if (err) handleError(err);
 
-    console.log(files);
+    files.forEach(function(file) {
+      console.log('  ' + file.name);
+    });
   });
+
 } else {
-  client.getFile(repo, file, function (err, res) {
+  get(repo, file, function(err, res) {
     if (err) {
       console.log(err);
-      console.log('Try doing', chalk.gray('`get-file ' + repo + ' --list`'), 'to list the available files.');
+      console.log('use', colors.gray('"get-file ' + repo + ' --list"'), 'to see a list of available files for the specified repository');
       process.exit(1);
     }
 
-    function success () {
-      console.log();
-      console.log('  ' + symbol.success, ' Got:', chalk.bold(file));
-      console.log();
+    var destPath = file;
+    var base = process.cwd();
+    if (argv.dest) {
+      base = path.resolve(argv.dest);
+      destPath = path.resolve(base, file);
     }
 
-    var ws = fs.createWriteStream(file, {'flags': 'a'});
-    res.pipe(ws)
-      .on('error', function (err) {
-        console.log(chalk.red('Error:'), err);
-        process.exit(1);
-      })
-      .on('finish', success)
-      .on('end', success);
+    mkdir(base, function(err) {
+      if (err) handleError(err);
+
+      var ws = fs.createWriteStream(destPath, {'flags': 'a'});
+      res.pipe(ws)
+        .on('error', handleError)
+        .on('finish', function() {
+          ok('file written to:', colors.cyan(path.relative(process.cwd(), destPath)));
+          ok('done');
+        });
+    });
   });
+}
+
+function handleError(err) {
+  console.log(colors.red(err.messsage));
+  process.exit(1);
 }

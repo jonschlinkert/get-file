@@ -28,18 +28,14 @@
     "test": "mocha"
   },
   "dependencies": {
-    "ansi-bold": "^0.1.1",
-    "ansi-gray": "^0.1.1",
-    "ansi-red": "^0.1.1",
-    "success-symbol": "^0.1.0"
+    "ansi-colors": "^0.2.0",
+    "fs-mkdirp-stream": "^1.0.0",
+    "log-ok": "^0.1.1",
+    "minimist": "^1.2.0"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-istanbul": "^0.10.1",
-    "gulp-jshint": "^1.11.2",
-    "gulp-mocha": "^2.1.3",
-    "jshint-stylish": "^2.0.1",
-    "mocha": "^2.3.3"
+    "gulp-format-md": "^0.1.12",
+    "mocha": "^2.5.3"
   },
   "keywords": [
     "download",
@@ -48,5 +44,25 @@
     "github",
     "repo",
     "repository"
-  ]
+  ],
+  "verb": {
+    "toc": false,
+    "layout": "common-minimal",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "list": [
+        "github-base",
+        "gists",
+        "github-contributors"
+      ]
+    },
+    "lint": {
+      "reflinks": true
+    }
+  }
 }

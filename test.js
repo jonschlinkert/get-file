@@ -18,7 +18,6 @@ describe('get-file', function() {
         cb(err);
         return;
       }
-
       assert(Array.isArray(files));
       assert(files.length);
       cb();
