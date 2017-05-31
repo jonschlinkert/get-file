@@ -3,24 +3,19 @@
   "description": "CLI to get a single file from Github repository.",
   "version": "0.2.0",
   "homepage": "https://github.com/jonschlinkert/get-file",
-  "author": {
-    "name": "Jon Schlinkert",
-    "url": "https://github.com/jonschlinkert"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/jonschlinkert/get-file.git"
-  },
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "contributors": [
+    "Brian Woodward (https://twitter.com/doowb)",
+    "Jon Schlinkert (http://twitter.com/jonschlinkert)"
+  ],
+  "repository": "jonschlinkert/get-file",
   "bugs": {
     "url": "https://github.com/jonschlinkert/get-file/issues"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/jonschlinkert/get-file/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "files": [
-    "index.js",
-    "bin/"
+    "bin",
+    "index.js"
   ],
   "main": "index.js",
   "bin": {
@@ -33,8 +28,10 @@
     "test": "mocha"
   },
   "dependencies": {
-    "chalk": "^0.5.1",
-    "log-symbols": "^1.0.1"
+    "ansi-bold": "^0.1.1",
+    "ansi-gray": "^0.1.1",
+    "ansi-red": "^0.1.1",
+    "success-symbol": "^0.1.0"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
